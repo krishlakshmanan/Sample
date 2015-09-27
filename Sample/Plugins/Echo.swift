@@ -16,21 +16,24 @@
 
 import XWebView
 
-class Echo: NSObject, XWVScripting {
+class Echo: NSObject {
     dynamic var prefix: String = ""
 
     func echo(message: String, callback: XWVScriptObject) {
         callback.call(arguments: [prefix + message], resultHandler: nil)
     }
+}
 
-    init(prefix: AnyObject?) {
+extension Echo : XWVScripting {
+    convenience init(prefix: AnyObject?) {
+        self.init()
         if prefix is String {
             self.prefix = prefix as! String
         } else if let num = prefix as? NSNumber {
             self.prefix = num.stringValue
         }
     }
-    class func isSelectorForConstructor(selector: Selector) -> Bool {
-        return selector == Selector("initWithPrefix:")
+    class func scriptNameForSelector(selector: Selector) -> String? {
+        return selector == Selector("initWithPrefix:") ? "" : nil
     }
 }

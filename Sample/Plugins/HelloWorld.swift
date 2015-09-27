@@ -17,12 +17,17 @@
 import UIKit
 import XWebView
 
-class HelloWorld : NSObject {
-    func show(text: AnyObject?) {
-        let title = text as? String
+class HelloWorld {
+    @objc func show(text: AnyObject?) {
         dispatch_async(dispatch_get_main_queue()) {
-            let alert = UIAlertView(title: title, message: "(from XWebView)", delegate: nil, cancelButtonTitle: "OK")
-            alert.show()
+            alert(title: text as? String, message: nil)
         }
     }
+}
+
+private func alert(title title: String?, message: String?) {
+    guard let root = UIApplication.sharedApplication().keyWindow?.rootViewController else { return }
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+    root.presentViewController(alert, animated: true, completion: nil)
 }

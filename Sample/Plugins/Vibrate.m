@@ -33,11 +33,12 @@ static BOOL canVibrate() {
 
 @implementation Vibrate
 
-- (void)$default {
+- (id)invokeDefaultMethodWithArguments:(NSArray *)args {
     if (canVibrate())
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     else
         NSLog(@"Device doesn't support vibration.");
+    return nil;
 }
 
 @end

@@ -23,7 +23,8 @@
     <script type='text/javascript'>
         function onload() {
             var prefix = 'Echo from native: ';
-            echo = new sample.Echo(prefix, function (){
+            (new sample.Echo(prefix)).then(function (obj){
+                window.echo = obj;
                 document.getElementById('prefix').value = echo.prefix;
             });
         }

@@ -18,10 +18,11 @@
 #define Sample_Vibrate_h
 
 #import <Foundation/Foundation.h>
+#import <XWebView/XWebView.h>
 
-@interface Vibrate : NSObject
+@interface Vibrate : NSObject<XWVScripting>
 
-- (void)$default;
+- (id)invokeDefaultMethodWithArguments:(NSArray *)args;
 
 @end
 
